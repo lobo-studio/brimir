@@ -43,12 +43,7 @@ group :test do
 end
 
 # Optional PostgreSQL for production
-gem 'pg', "~> 0.19", group: :postgresql
-# Optional MySQL for production
-gem 'mysql2', "~> 0.4", group: :mysql
-# Optional SQLite for development
-gem 'sqlite3', "~> 1.3", group: :sqlite
-
+gem 'pg'
 # authentication
 gem 'devise', "~> 4.2"
 gem 'devise_ldap_authenticatable', "~> 0.8"
