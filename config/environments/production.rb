@@ -1,4 +1,8 @@
 Rails.application.configure do
+
+  config.action_mailer.default_options = { from: 'contact@mesbesoinsmoto.com' }
+
+  config.action_mailer.default_url_options = { host: 'tickets.mesbesoinsmoto.com' }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
