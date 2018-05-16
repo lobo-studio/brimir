@@ -2,6 +2,7 @@ en:
   language_name: English
 # layouts/application
   new_ticket: New ticket
+  new_payment_request: New payment request
   inbox: Inbox
   mine: Mine
   closed_tickets: Closed
@@ -208,6 +209,8 @@ en:
 
 # controllers/tickets
   ticket_added: Ticket added
+  payment_requests_added: Payment request link was sent
+  invoices_added: Invoice was sent
   ticket_added_public: Your enquiry has been sent to the relevant service who will get back to you as soon as possible
   form_validation_error: Malformed form. Please fill the form correctly
   captcha_error: Please solve the captcha first

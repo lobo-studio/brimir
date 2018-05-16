@@ -23,6 +23,7 @@ class Ability
 
     can :create, Ticket
     can :create, Attachment
+    can :create, Invoice
     can :update, Reply, user_id: user.id
     can :update, Reply, user_id: nil
 

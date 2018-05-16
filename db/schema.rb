@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171016140901) do
+ActiveRecord::Schema.define(version: 20180515190323) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "attachments", force: :cascade do |t|
     t.integer "attachable_id"
@@ -50,6 +53,27 @@ ActiveRecord::Schema.define(version: 20171016140901) do
     t.index ["user_id"], name: "index_identities_on_user_id"
   end
 
+  create_table "invoice_items", force: :cascade do |t|
+    t.bigint "invoice_id"
+    t.integer "quantity"
+    t.decimal "amount"
+    t.decimal "tax"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.index ["invoice_id"], name: "index_invoice_items_on_invoice_id"
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.bigint "ticket_id"
+    t.text "customer_address"
+    t.string "customer_email"
+    t.date "invoice_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ticket_id"], name: "index_invoices_on_ticket_id"
+  end
+
   create_table "labelings", force: :cascade do |t|
     t.integer "label_id"
     t.string "labelable_type"
@@ -79,8 +103,17 @@ ActiveRecord::Schema.define(version: 20171016140901) do
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
+  create_table "payment_requests", force: :cascade do |t|
+    t.bigint "ticket_id"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "amount"
+    t.index ["ticket_id"], name: "index_payment_requests_on_ticket_id"
+  end
+
   create_table "replies", force: :cascade do |t|
-    t.text "content", limit: 1073741823
+    t.text "content"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "ticket_id"
@@ -153,7 +186,7 @@ ActiveRecord::Schema.define(version: 20171016140901) do
 
   create_table "tickets", force: :cascade do |t|
     t.string "subject"
-    t.text "content", limit: 1073741823
+    t.text "content"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "assignee_id"
@@ -216,4 +249,7 @@ ActiveRecord::Schema.define(version: 20171016140901) do
     t.index ["schedule_id"], name: "index_users_on_schedule_id"
   end
 
+  add_foreign_key "invoice_items", "invoices"
+  add_foreign_key "invoices", "tickets"
+  add_foreign_key "payment_requests", "tickets"
 end

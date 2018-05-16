@@ -34,10 +34,18 @@ class Api::V1::TicketsController < Api::V1::ApplicationController
   def create
     @ticket = Ticket.new(ticket_params)
     if @ticket.save
+      add_labels(@ticket)
       NotificationMailer.incoming_message(@ticket, params[:message])
       head :created
     else
       head :bad_request
+    end
+  end
+
+  def add_labels(ticket)
+    p ticket_params[:labels].class
+    if ticket_params[:labels]
+      #ticket.labels << Label.where(name: ticket_params[:])
     end
   end
 end

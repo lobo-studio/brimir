@@ -38,8 +38,6 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    addressable (2.5.2)
-      public_suffix (>= 2.0.2, < 4.0)
     airbrussh (1.3.0)
       sshkit (>= 1.6.1, != 1.7.0)
     arel (8.0.0)
@@ -48,6 +46,8 @@ GEM
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
     bcrypt (3.1.11)
+    braintree (2.88.0)
+      builder (>= 2.0.0)
     builder (3.2.3)
     byebug (10.0.2)
     cancancan (2.1.4)
@@ -64,6 +64,7 @@ GEM
       capistrano-bundler (~> 1.1)
     chunky_png (1.3.10)
     climate_control (0.2.0)
+    cocoon (1.2.11)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -109,6 +110,7 @@ GEM
       devise (>= 3.4.1)
       net-ldap (>= 0.16.0)
     docile (1.1.5)
+    dotenv (2.4.0)
     erubi (1.7.1)
     execjs (2.7.0)
     fancybox2-rails (0.2.7)
@@ -144,10 +146,6 @@ GEM
     jquery-visibility-rails (1.0.8)
     json (2.1.0)
     jwt (1.5.6)
-    launchy (2.4.3)
-      addressable (~> 2.3)
-    letter_opener (1.6.0)
-      launchy (~> 2.2)
     loofah (2.2.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -194,11 +192,16 @@ GEM
       mime-types
       mimemagic (~> 0.3.0)
       terrapin (~> 0.6.0)
+    pdf-core (0.7.0)
     pg (0.21.0)
+    prawn (2.2.2)
+      pdf-core (~> 0.7.0)
+      ttfunk (~> 1.5)
+    prawn-table (0.2.2)
+      prawn (>= 1.3.0, < 3.0.0)
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
-    public_suffix (3.0.2)
     rack (2.0.4)
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
@@ -285,6 +288,7 @@ GEM
     tins (1.16.3)
     trix (0.11.1)
       rails (> 4.1, < 5.2)
+    ttfunk (1.5.1)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uglifier (3.0.4)
@@ -300,17 +304,20 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  braintree
   byebug (~> 10.0)
   cancancan (~> 2.1, >= 2.1.4)
   capistrano (~> 3.8)
   capistrano-bundler
   capistrano-rails
+  cocoon
   coffee-rails (~> 4.2.0)
   compass-rails (~> 3.0.0)
   coveralls (~> 0.8)
   devise (~> 4.2)
   devise-i18n (~> 1.1)
   devise_ldap_authenticatable (~> 0.8)
+  dotenv
   fancybox2-rails (~> 0.2)
   font-awesome-rails (~> 4.7)
   foundation-rails (~> 5.5.0)
@@ -320,12 +327,13 @@ DEPENDENCIES
   jbuilder (~> 2.6)
   jquery-rails (~> 4.2)
   jquery-visibility-rails
-  letter_opener (~> 1.4)
   mail (~> 2.6, != 2.7.0)
   mysql2 (~> 0.4)
   omniauth-google-oauth2 (~> 0.4)
   paperclip (~> 5.3)
   pg (~> 0.19)
+  prawn
+  prawn-table
   pry (~> 0.11)
   rails (~> 5.1.0)
   rails-controller-testing

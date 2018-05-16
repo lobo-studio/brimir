@@ -29,7 +29,7 @@ group :development do
   gem 'spring', "~> 2.0"
 
   # open sent emails in the browser
-  gem 'letter_opener', "~> 1.4"
+  # gem 'letter_opener', "~> 1.4"
 end
 
 group :test do
@@ -104,3 +104,10 @@ group :development do
   gem 'capistrano-rails', require: false
   gem 'capistrano-bundler', require: false
 end
+
+# Custom
+gem 'braintree'
+gem 'dotenv'
+gem 'prawn'
+gem 'prawn-table'
+gem 'cocoon'

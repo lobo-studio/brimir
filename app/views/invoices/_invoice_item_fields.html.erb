@@ -1,0 +1,8 @@
+<div class='nested-fields panel'>
+  <%= f.text_field :title, required: true %>
+  <%= f.text_field :amount, required: true %>
+  <%= f.text_field :quantity, required: true, value: 1 %>
+  <%= f.text_field :tax, required: true %>
+  <%= link_to_remove_association "remove invoice item", f, class: 'tiny secondary button' %>
+</div>
+<br/>
