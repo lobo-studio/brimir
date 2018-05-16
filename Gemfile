@@ -111,4 +111,3 @@ gem 'dotenv'
 gem 'prawn'
 gem 'prawn-table'
 gem 'cocoon'
-gem 'letter_opener', "~> 1.4"
