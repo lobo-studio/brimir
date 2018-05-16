@@ -21,6 +21,7 @@
 //= require tickets
 //= require fancybox
 //= require jquery-visibility
+//= require cocoon
 
 (function() {
 

@@ -11,7 +11,12 @@ Brimir::Application.routes.draw do
     resource :selected, only: :update, controller: :selected
   end
 
+  get '/payment_requests/callback' => 'payment_requests#callback'
+
   resources :tickets, except: [:destroy, :edit] do
+    resources :invoices,  only: [:new, :create, :show]
+    resources :invoice_items
+    
     resource :lock, only: [:destroy, :create], module: :tickets
   end
 
@@ -44,5 +49,10 @@ Brimir::Application.routes.draw do
       end
     end
   end
+
+  # Custom
+
+  #root 'payment_requests#new'
+
 
 end

@@ -29,6 +29,7 @@ module TicketsStrongParams
         :priority,
         :message_id,
         :content_type,
+        labelings_attributes: [ label: [ :id, :name] ],
         attachments_attributes: [
           :file
         ])
@@ -39,6 +40,7 @@ module TicketsStrongParams
         :subject,
         :priority,
         :content_type,
+        labelings_attributes: [ label: [ :id, :name] ],
         attachments_attributes: [
           :file
         ])

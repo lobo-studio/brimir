@@ -25,10 +25,13 @@ class Ticket < ApplicationRecord
   belongs_to :assignee, class_name: 'User', optional: true
   belongs_to :to_email_address, -> { EmailAddress.verified }, class_name: 'EmailAddress', optional: true
   belongs_to :locked_by, class_name: 'User', optional: true
+  has_one :invoice
 
   has_many :replies, dependent: :destroy
   has_many :labelings, as: :labelable, dependent: :destroy
   has_many :labels, through: :labelings
+  accepts_nested_attributes_for :labels, allow_destroy: true
+  accepts_nested_attributes_for :labelings, allow_destroy: true
 
   has_many :notifications, as: :notifiable, dependent: :destroy
   has_many :notified_users, source: :user, through: :notifications

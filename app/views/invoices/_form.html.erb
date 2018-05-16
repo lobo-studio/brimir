@@ -1,0 +1,29 @@
+<%= form_for @invoice, url: ticket_invoices_path, method: :post do |f| %>
+
+  <h3><%= t(:new_invoice) %></h3>
+
+  <p>
+    <%= f.text_field :customer_email, tabindex: tabindex, required: true %>
+  </p>
+
+  <p>
+    <%= f.text_field :customer_address, tabindex: tabindex, required: true %>
+  </p>
+
+  <p>
+    <%= f.text_field :invoice_date, tabindex: tabindex, required: true %>
+  </p>
+
+  <div id='invoices'>
+    <%= f.fields_for :invoice_items do |invoice_form| %>
+      <%= render 'invoice_items_fields', f: invoice_form %>
+    <% end %>
+    <hr/>
+    <%= link_to_add_association 'add invoice item', f, :invoice_items, class: 'tiny secondary button' %>
+  </div>
+
+  <p>
+    <%= f.submit 'Generate and send invoice', class: 'button regular radius' %>
+  </p>
+
+<% end %>
