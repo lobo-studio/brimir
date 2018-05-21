@@ -31,7 +31,7 @@ Rails.application.configure do
 
   # Open emails in the browser.
   # https://github.com/ryanb/letter_opener
-  config.action_mailer.delivery_method = :letter_opener
+  #config.action_mailer.delivery_method = :letter_opener
 
   config.action_mailer.perform_caching = false
 
