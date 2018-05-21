@@ -56,25 +56,30 @@ class InvoicePdf
     temp_arr = invoice.invoice_items.map { |i| i.attributes }
 
     pdf.move_down 10
-    items = [["No", "Description", "Qt.", "Tax", "Amount"]]
+    items = [["No", "Description", "Qt.", "PU HT", "Montant HT", "TVA"]]
 
     data = temp_arr.each_with_index.map do |item, i|
       [
         i + 1,
         item['title'],
         item['quantity'],
+        item['unit_price'],
+        item['unit_price'] * item['quantity'],
         item['tax'],
-        item['amount'] * item['quantity'],
       ]
     end
 
     items += data
 
-    items += [["", "Total", "", "", data.map { |x| (x[2] * x[4]) }.sum.to_s]]
+    mntht = data.map { |x| x[4] }.sum
+    tva = data.map { |x| (x[2] * x[4]) }.sum
+    items += [["", "Montant total HT", "", "", "", mntht.to_s]]
+    items += [["", "Montant total TVA", "", "", "", tva.to_s]]
+    items += [["", "Montant total TTC", "", "", "", (mntht + tva).to_s]]
 
 
     pdf.table items, :header => true, 
-      :column_widths => { 0 => 30, 1 => 350, 2 => 40, 3 => 60, 4 => 60}, :row_colors => ["d2e3ed", "FFFFFF"] do
+      :column_widths => { 0 => 30, 1 => 290, 2 => 40, 3 => 50, 4 => 80, 5 => 50}, :row_colors => ["d2e3ed", "FFFFFF"] do
         style(columns(3)) { |x| x.align = :right }
     end
 

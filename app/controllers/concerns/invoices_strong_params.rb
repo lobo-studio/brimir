@@ -11,7 +11,7 @@ module InvoicesStrongParams
         :_destroy,
         :title,
         :quantity,
-        :amount,
+        :unit_price,
         :tax
       ]
     )
