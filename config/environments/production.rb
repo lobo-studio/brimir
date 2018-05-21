@@ -86,6 +86,19 @@ Rails.application.configure do
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'mail.gandi.net',
+    port: 587,
+    from: 'contact@mesbesoinsmoto.com',
+    #domain: 'mesbesoinsmoto.com',
+    user_name: 'contact@mesbesoinsmoto.com',
+    password: 'bQG-c5y-3Vs-U7J',
+    authentication: 'plain',
+    enable_starttls_auto: true
+ }
+  config.action_mailer.default_options = { from: 'contact@mesbesoinsmoto.com' }
+  config.action_mailer.default_url_options = { host: 'tickets.mesbesoinsmoto.com' }
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
