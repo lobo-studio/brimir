@@ -39,4 +39,3 @@ coverage
 .byebug_history
 /public/assets
 /public/invoices
-config/database.yml
