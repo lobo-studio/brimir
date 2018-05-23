@@ -93,10 +93,10 @@ Rails.application.configure do
      address: 'mail.gandi.net',
      port: 587,
      from: 'contact@mesbesoinsmoto.com',
-     #domain: 'mesbesoinsmoto.com',
+     domain: 'tickets.mesbesoinsmoto.com',
      user_name: 'contact@mesbesoinsmoto.com',
      password: 'bQG-c5y-3Vs-U7J',
-     authentication: 'plain',
+     authentication: 'login',
      enable_starttls_auto: true
   }
   # Do not dump schema after migrations.
