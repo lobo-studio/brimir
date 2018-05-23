@@ -13,7 +13,7 @@ class InvoiceMailer < ActionMailer::Base
       headers['Message-ID'] = "<#{@ticket.message_id}>"
     end
 
-    mail(to: @invoice.customer_email, subject: title, from: 'contact@mesbesoinsmoto.com')
+    mail(to: @invoice.customer_email, subject: title)
   end
 
   protected
