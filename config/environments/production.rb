@@ -92,8 +92,8 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
      address: 'mail.gandi.net',
      port: 587,
-     from: 'contact@mesbesoinsmoto.com',
-     domain: 'tickets.mesbesoinsmoto.com',
+     #from: 'contact@mesbesoinsmoto.com',
+     #domain: 'tickets.mesbesoinsmoto.com',
      user_name: 'contact@mesbesoinsmoto.com',
      password: 'bQG-c5y-3Vs-U7J',
      authentication: 'login',
