@@ -89,15 +89,16 @@ Rails.application.configure do
   config.action_mailer.default_options = { from: 'contact@mesbesoinsmoto.com' }
   config.action_mailer.default_url_options = { host: 'tickets.mesbesoinsmoto.com' }
 
-  ActionMailer::Base.smtp_settings = {
-    :user_name => 'contact@mesbesoinsmoto.com',
-    :password => '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',
-    :domain => 'tickets.mesbesoinsmoto.com',
-    :address => 'smtp.sendgrid.net',
-    :port => 587,
-    :authentication => :plain,
-    :enable_starttls_auto => true
-  }
+  config.action_mailer.smtp_settings = {
+    address: 'mail.gandi.net',
+    port: 587,
+    from: 'contact@mesbesoinsmoto.com',
+    #domain: 'mesbesoinsmoto.com',
+    user_name: 'contact@mesbesoinsmoto.com',
+    password: 'bQG-c5y-3Vs-U7J',
+    authentication: 'login',
+    enable_starttls_auto: true
+ }
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
