@@ -20,7 +20,7 @@ class InvoicesController < ApplicationController
     if @invoice.save
       pdf = InvoicePdf.new.generate(@ticket, @invoice)
       file = File.open(Rails.root.join('public', 'invoices', "invoice_#{@ticket.id}.pdf"))
-      @invoice.attachments << Attachment.new(file: file)
+      @invoice.attachments << Attachment.create(file: file)
       InvoiceMailer.send_invoice(@ticket, @invoice).deliver_now
       redirect_to tickets_url, notice: I18n::translate(:invoices_added)
     else
