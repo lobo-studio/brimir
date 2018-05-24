@@ -11,6 +11,10 @@ Brimir::Application.routes.draw do
     resource :selected, only: :update, controller: :selected
   end
 
+  #resources :payment_requests,  only: [:new, :create, :show]
+  
+  get '/invoices/:id/payment' => 'payment_requests#new', as: :new_payment
+  post '/invoices/:id/payment' => 'payment_requests#create', as: :payment_requests
   get '/payment_requests/callback' => 'payment_requests#callback'
 
   resources :tickets, except: [:destroy, :edit] do

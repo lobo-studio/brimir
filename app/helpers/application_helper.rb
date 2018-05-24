@@ -16,6 +16,11 @@
 
 # helpers used system wide
 module ApplicationHelper
+
+  def alert_string(alert)
+    alert.is_a?(Array) ? safe_join(alert, "<br />".html_safe) : alert
+  end
+  
   def active_elem_if(elem, condition, attributes = {}, &block)
     if condition
       # define class as empty string when no class given
