@@ -93,7 +93,7 @@ Rails.application.configure do
     address: 'smtp.sendgrid.net',
     port: 2525,
     from: 'contact@mesbesoinsmoto.com',
-    domain: 'mesbesoinsmoto.com',
+    domain: 'tickets.mesbesoinsmoto.com',
     user_name: 'contact@mesbesoinsmoto.com',
     password: 'bQG-c5y-3Vs-U7J',
     authentication: :login,
