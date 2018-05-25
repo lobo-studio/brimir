@@ -4,5 +4,5 @@
 <p>Please download attachment and press pay link.</p>
 
 <p>
-  <a href="<%= new_payment_url(@invoice) %>" target="_blank">Pay!</a>
+  <a href="<%= new_payment_request_url(hash: secret_id(@invoice.id)) %>" target="_blank">Pay!</a>
 </p>

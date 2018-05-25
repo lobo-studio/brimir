@@ -26,7 +26,7 @@ class Ticket < ApplicationRecord
   belongs_to :to_email_address, -> { EmailAddress.verified }, class_name: 'EmailAddress', optional: true
   belongs_to :locked_by, class_name: 'User', optional: true
   has_one :invoice
-
+  has_many :payment_requests, dependent: :destroy
   has_many :replies, dependent: :destroy
   has_many :labelings, as: :labelable, dependent: :destroy
   has_many :labels, through: :labelings

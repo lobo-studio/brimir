@@ -1,6 +1,7 @@
 class InvoiceMailer < ActionMailer::Base
 
   add_template_helper HtmlTextHelper
+  add_template_helper ApplicationHelper
 
   def send_invoice(ticket, invoice)
     @ticket = ticket

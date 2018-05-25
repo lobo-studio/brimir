@@ -112,9 +112,17 @@
             <%= link_to '[Invoice]', new_ticket_invoice_path(ticket) %>
             <% if ticket.invoice %>
               |
-              <%= link_to 'PDF', "/invoices/invoice_#{ticket.try(:id)}.pdf" %>
+              <%= link_to 'PDF', ticket.invoice.attachments&.last&.file&.url(:original, false) %>
             <% end %>
           </span>
+        </div>
+
+        <div class="medium-2 v-middle columns"> 
+          <% if ticket.invoice %>
+              <%= ticket.payment_requests.last.status.upcase %>
+            <% else %>
+              N/A
+          <% end %>
         </div>
 
         <% if ticket.labels.viewable_by(current_user).any? %>
