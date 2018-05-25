@@ -90,10 +90,10 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'tickets.mesbesoinsmoto.com' }
 
   config.action_mailer.smtp_settings = {
-    address: 'smtp.sendgrid.net',
-    port: 2525,
+    address: 'localhost',
+    port: 587,
     from: 'contact@mesbesoinsmoto.com',
-    domain: 'tickets.mesbesoinsmoto.com',
+    domain: 'mesbesoinsmoto.com',
     user_name: 'contact@mesbesoinsmoto.com',
     password: 'bQG-c5y-3Vs-U7J',
     authentication: :login,
