@@ -59,7 +59,7 @@ Rails.application.configure do
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  #config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
@@ -86,13 +86,13 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'tickets.mesbesoinsmoto.com' }
 
   config.action_mailer.smtp_settings = {
-    address: 'mail.gandi.net',
-    port: 465,
+    address: 'smtp.sendgrid.net',
+    port: 587,
     from: 'contact@mesbesoinsmoto.com',
     domain: 'mesbesoinsmoto.com',
     user_name: 'contact@mesbesoinsmoto.com',
     password: 'bQG-c5y-3Vs-U7J',
-    authentication: 'login',
+    authentication: :login,
     enable_starttls_auto: true
  }
   # Do not dump schema after migrations.
