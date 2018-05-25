@@ -91,7 +91,7 @@ Rails.application.configure do
 
   config.action_mailer.smtp_settings = {
     address: 'smtp.sendgrid.net',
-    port: 587,
+    port: 2525,
     from: 'contact@mesbesoinsmoto.com',
     domain: 'mesbesoinsmoto.com',
     user_name: 'contact@mesbesoinsmoto.com',
