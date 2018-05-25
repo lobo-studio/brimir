@@ -21,6 +21,14 @@ class InvoicesController < ApplicationController
       pdf = InvoicePdf.new.generate(@ticket, @invoice)
       file = File.open(Rails.root.join('public', 'invoices', "invoice_#{@ticket.id}.pdf"))
       @invoice.attachments << Attachment.create(file: file)
+      data = @invoice.invoice_items
+      montant_total_ht = data.map { |x| x.unit_price * x.quantity }.sum
+      montant_total_tva = data.map { |x| x.tax }.sum
+      montant_total_ttc = montant_total_ht + montant_total_tva
+      PaymentRequest.create(ticket: @ticket, status: :pending, 
+        montant_total_ht: montant_total_ht, 
+        montant_total_tva: montant_total_tva,
+        montant_total_ttc: montant_total_ttc)
       InvoiceMailer.send_invoice(@ticket, @invoice).deliver_now
       redirect_to tickets_url, notice: I18n::translate(:invoices_added)
     else

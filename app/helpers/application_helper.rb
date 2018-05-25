@@ -33,6 +33,10 @@ module ApplicationHelper
     content_tag(elem, attributes, &block)
   end
 
+  def secret_id(id)
+    (Invoice::KEY + "_" + Base64.encode64(id.to_s)).each_byte.map { |b| b.to_s(16) }.join
+  end
+
   # change the default link renderer for will_paginate
   def will_paginate(collection_or_options = nil, options = {})
     if collection_or_options.is_a? Hash

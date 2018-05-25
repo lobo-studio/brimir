@@ -1,5 +1,5 @@
 class PaymentRequestsController < ApplicationController
-
+  include ApplicationHelper
   layout 'payment'
   before_action :authenticate_user!, except: [:callback, :new, :show, :create]
   load_and_authorize_resource :payment_request, except: [:callback, :new, :show, :create]
@@ -16,7 +16,9 @@ class PaymentRequestsController < ApplicationController
   ]
 
   def new
-    @invoice = Invoice.find(params[:id])
+    find_invoice
+    ticket = @invoice.ticket
+    @amount = ticket.payment_requests.where(status: :pending).last.montant_total_ttc
     @client_token = gateway.client_token.generate
   end
 
@@ -26,12 +28,14 @@ class PaymentRequestsController < ApplicationController
   end
 
   def create
-    @invoice = Invoice.find(params[:id])
-    amount = params["amount"] # In production you should not take amounts directly from clients
+    find_invoice
+    ticket = @invoice.ticket
+    pr = ticket.payment_requests.where(status: :pending).last
+
     nonce = params["payment_method_nonce"]
 
     result = gateway.transaction.sale(
-      amount: amount,
+      amount: pr.montant_total_ttc,
       payment_method_nonce: nonce,
       :options => {
         :submit_for_settlement => true
@@ -39,11 +43,13 @@ class PaymentRequestsController < ApplicationController
     )
 
     if result.success? || result.transaction
-      redirect_to checkout_path(result.transaction.id)
+      pr.status = :paid
+      pr.save
+      redirect_to payment_request_path(result.transaction.id)
     else
       error_messages = result.errors.map { |error| "Error: #{error.code}: #{error.message}" }
       flash[:error] = error_messages
-      redirect_to new_checkout_path
+      redirect_to new_payment_request_url(hash: secret_id(@invoice.id))
     end
   end
 
@@ -74,5 +80,11 @@ class PaymentRequestsController < ApplicationController
       :public_key => ENV["BT_PUBLIC_KEY"],
       :private_key => ENV["BT_PRIVATE_KEY"],
     )
+  end
+
+  def find_invoice
+    hash = params[:hash].scan(/../).map { |x| x.hex.chr }.join
+    id_part = hash.split('_').last
+    @invoice = Invoice.find(Base64.decode64(id_part))
   end
 end

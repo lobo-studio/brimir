@@ -72,17 +72,16 @@ class InvoicePdf
     items += data
 
     mntht = data.map { |x| x[4] }.sum
-    tva = data.map { |x| (x[2] * x[4]) }.sum
+    
+    tva = data.map { |x| x[5] }.sum
     items += [["", "Montant total HT", "", "", "", mntht.to_s]]
     items += [["", "Montant total TVA", "", "", "", tva.to_s]]
     items += [["", "Montant total TTC", "", "", "", (mntht + tva).to_s]]
-
 
     pdf.table items, :header => true, 
       :column_widths => { 0 => 30, 1 => 290, 2 => 40, 3 => 50, 4 => 80, 5 => 50}, :row_colors => ["d2e3ed", "FFFFFF"] do
         style(columns(3)) { |x| x.align = :right }
     end
-
 
     pdf.move_down 40
     pdf.text "Terms & Conditions of Sales"

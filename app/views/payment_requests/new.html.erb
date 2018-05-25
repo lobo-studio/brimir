@@ -9,12 +9,13 @@
         </p>
       </header>
 
-      <%= form_tag("/invoices/#{@invoice.id}/payment", method: "post", id: "payment-form") do %>
+      <%= form_tag("/payment_requests", method: "post", id: "payment-form") do %>
         <section>
           <label for="amount">
             <span class="input-label">Amount</span>
             <div class="input-wrapper amount-wrapper">
-              <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="10">
+              <input type='hidden' name='hash' value="<%= secret_id(@invoice.id) %>">
+              <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="<%= @amount %>">
             </div>
           </label>
 
