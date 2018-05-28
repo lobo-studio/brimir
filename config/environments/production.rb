@@ -86,7 +86,7 @@ Rails.application.configure do
   end
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_options = { from: 'contact@mesbesoinsmoto.com' }
+  config.action_mailer.default_options = { from: 'brimir@mesbesoinsmoto.com' }
   config.action_mailer.default_url_options = { host: 'tickets.mesbesoinsmoto.com' }
 
   config.action_mailer.smtp_settings = {

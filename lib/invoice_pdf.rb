@@ -56,11 +56,10 @@ class InvoicePdf
     temp_arr = invoice.invoice_items.map { |i| i.attributes }
 
     pdf.move_down 10
-    items = [["No", "Description", "Qt.", "PU HT", "Montant HT", "TVA"]]
+    items = [["Description", "Qt.", "PU HT", "Montant HT", "TVA"]]
 
     data = temp_arr.each_with_index.map do |item, i|
       [
-        i + 1,
         item['title'],
         item['quantity'],
         item['unit_price'],
@@ -71,9 +70,9 @@ class InvoicePdf
 
     items += data
 
-    mntht = data.map { |x| x[4] }.sum
+    mntht = data.map { |x| x[3] }.sum
     
-    tva = data.map { |x| x[5] }.sum
+    tva = data.map { |x| x[4] }.sum
     items += [["", "Montant total HT", "", "", "", mntht.to_s]]
     items += [["", "Montant total TVA", "", "", "", tva.to_s]]
     items += [["", "Montant total TTC", "", "", "", (mntht + tva).to_s]]
