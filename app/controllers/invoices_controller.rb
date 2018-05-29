@@ -29,7 +29,7 @@ class InvoicesController < ApplicationController
         montant_total_ht: montant_total_ht, 
         montant_total_tva: montant_total_tva,
         montant_total_ttc: montant_total_ttc)
-      InvoiceMailer.send_invoice(@ticket, @invoice).deliver_now
+      QuoteMailer.send_quote(@ticket, @invoice).deliver_now
       redirect_to tickets_url, notice: I18n::translate(:invoices_added)
     else
       render :new

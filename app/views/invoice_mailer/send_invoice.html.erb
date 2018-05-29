@@ -1,8 +1,5 @@
-<%# WATCH OUT make sure you don't add whitespace accidentally %>
 <h1>You received new invoice</h1>
 
-<p>Please download attachment and press pay link.</p>
+<p>Thanks for the payment.</p>
 
-<p>
-  <a href="<%= new_payment_request_url(hash: secret_id(@invoice.id)) %>" target="_blank">Pay!</a>
-</p>
+<p>You can download invoice from attachments.</p>

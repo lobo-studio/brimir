@@ -12,7 +12,7 @@ class InvoicePdf
     # See http://prawn.majesticseacreature.com/manual.pdf
     pdf.define_grid(:columns => 5, :rows => 8, :gutter => 10) 
 
-    pdf.grid([0,0], [1,1]).bounding_box do 
+    g1 = pdf.grid([0,0], [1,1]).bounding_box do 
       pdf.text  "INVOICE", :size => 18
       pdf.text "Invoice No: #{invoice.id}", :align => :left
       
@@ -31,7 +31,7 @@ class InvoicePdf
       pdf.text "Fax No: 1234567890"
     end
 
-    pdf.grid([0,3.6], [1,4]).bounding_box do 
+    g2 = pdf.grid([0,3.6], [1,4]).bounding_box do 
       # Assign the path to your file name first to a local variable.
       logo_path = File.expand_path('../images/logo.png', __FILE__)
 
@@ -73,28 +73,31 @@ class InvoicePdf
     mntht = data.map { |x| x[3] }.sum
     
     tva = data.map { |x| x[4] }.sum
-    items += [["", "Montant total HT", "", "", "", mntht.to_s]]
-    items += [["", "Montant total TVA", "", "", "", tva.to_s]]
-    items += [["", "Montant total TTC", "", "", "", (mntht + tva).to_s]]
+    #items += [["", "Montant total HT", "", "", "", mntht.to_s]]
+    #items += [["", "Montant total TVA", "", "", "", tva.to_s]]
+    #items += [["", "Montant total TTC", "", "", "", (mntht + tva).to_s]]
 
-    pdf.table items, :header => true, 
-      :column_widths => { 0 => 30, 1 => 290, 2 => 40, 3 => 50, 4 => 80, 5 => 50}, :row_colors => ["d2e3ed", "FFFFFF"] do
+    t1 = pdf.table items, :header => true, 
+      :column_widths => { 0 => 310, 1 => 40, 2 => 50, 3 => 80, 4 => 50}, :row_colors => ["d2e3ed", "FFFFFF"] do
         style(columns(3)) { |x| x.align = :right }
     end
 
-    pdf.move_down 40
-    pdf.text "Terms & Conditions of Sales"
-    pdf.text "1.	All cheques should be crossed and made payable to Mesbesoinsmoto LLC"
+    pdf.bounding_box([pdf.bounds.right - 180, pdf.bounds.height - g1.height - g2.height - t1.height + 80], :width => 250, :height => 100) do
+      pdf.text "Montant total HT              #{mntht.to_s}" #, :align => :right
+      pdf.text "Montant total TVA            #{tva.to_s}" #, :align => :right
+      pdf.text "....................................................." #, :align => :right
+      pdf.text "Montant total TTC            #{(mntht + tva).to_s}" #, :align => :right
+    end
 
-    pdf.move_down 40
-    pdf.text "Received in good condition", :style => :italic
 
-    pdf.move_down 20
-    pdf.text "..............................."
-    pdf.text "Signature/Company Stamp"
 
-    pdf.move_down 10
-    pdf.stroke_horizontal_rule
+
+    # pdf.move_down 20
+    # pdf.text "..............................."
+    # pdf.text "Signature/Company Stamp"
+
+    # pdf.move_down 10
+    # pdf.stroke_horizontal_rule
 
     pdf.bounding_box([pdf.bounds.right - 50, pdf.bounds.bottom], :width => 60, :height => 20) do
       pagecount = pdf.page_count
