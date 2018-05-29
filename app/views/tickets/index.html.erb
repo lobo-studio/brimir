@@ -112,7 +112,6 @@
             <%= link_to '[Invoice]', new_ticket_invoice_path(ticket) %>
             <% if ticket.invoice %>
               |
-              <%= link_to 'PDF', "/invoices/invoice_#{ticket.id}.pdf", target: "_blank" %>
               <%= link_to 'PDF', ticket.invoice.attachments&.last&.file&.url(:original, false) %>
             <% end %>
           </span>
