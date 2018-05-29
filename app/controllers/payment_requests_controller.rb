@@ -45,6 +45,7 @@ class PaymentRequestsController < ApplicationController
     if result.success? || result.transaction
       pr.status = :paid
       pr.save
+      InvoiceMailer.send_invoice(ticket, @invoice).deliver_now
       redirect_to payment_request_path(result.transaction.id)
     else
       error_messages = result.errors.map { |error| "Error: #{error.code}: #{error.message}" }
@@ -58,15 +59,15 @@ class PaymentRequestsController < ApplicationController
 
     if TRANSACTION_SUCCESS_STATUSES.include? status
       result_hash = {
-        :header => "Sweet Success!",
+        :header => "Success!",
         :icon => "success",
-        :message => "Your test transaction has been successfully processed. See the Braintree API response and try again."
+        :message => "Your transaction has been successfully processed."
       }
     else
       result_hash = {
-        :header => "Transaction Failed",
+        :header => "Failed",
         :icon => "fail",
-        :message => "Your test transaction has a status of #{status}. See the Braintree API response and try again."
+        :message => "Your transaction has a status of #{status}. Please try again, and contact support"
       }
     end
   end

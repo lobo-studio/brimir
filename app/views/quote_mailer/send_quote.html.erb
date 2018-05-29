@@ -1,0 +1,7 @@
+<h1>Hello, this is payment request email</h1>
+
+<p>Please press link and pay</p>
+
+<p>
+  <a href="<%= new_payment_request_url(hash: secret_id(@invoice.id)) %>" target="_blank">Pay!</a>
+</p>
