@@ -42,7 +42,7 @@ class PaymentRequestsController < ApplicationController
       }
     )
 
-    if result.success? || result.transaction
+    if result.success? #|| result.transaction
       pr.status = :paid
       pr.save
       InvoiceMailer.send_invoice(ticket, @invoice).deliver_now
