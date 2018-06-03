@@ -147,7 +147,13 @@ GEM
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     gravatar_image_tag (1.2.0)
+    griddler (1.5.2)
+      htmlentities
+      rails (>= 3.2.0)
+    griddler-sendgrid (1.0.1)
+      griddler
     hashie (3.5.7)
+    htmlentities (4.3.4)
     http_accept_language (2.1.1)
     i18n (1.0.0)
       concurrent-ruby (~> 1.0)
@@ -340,6 +346,8 @@ DEPENDENCIES
   foundation-rails (~> 5.5.0)
   foundation_rails_helper (~> 2.0)
   gravatar_image_tag (~> 1.2)
+  griddler
+  griddler-sendgrid
   http_accept_language (~> 2.1)
   jbuilder (~> 2.6)
   jquery-rails (~> 4.2)
