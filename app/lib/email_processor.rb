@@ -6,10 +6,10 @@ class EmailProcessor
   def process
     begin
       Rails.logger.info '---------------------------------------------------------------------------'
-      Rails.logger.info email
+      Rails.logger.info @email
       Rails.logger.info '---------------------------------------------------------------------------'
     rescue Exception => e
-      puts email
+      puts @email
     end
   end
 end
