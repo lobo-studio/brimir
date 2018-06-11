@@ -171,11 +171,20 @@ class TicketsController < ApplicationController
   end
 
   def create
+    Rails.logger.info '---------------------------------------------------------------------------'
+    Rails.logger.info params
+    Rails.logger.info '---------------------------------------------------------------------------'
+    Rails.logger.info '---------------------------------------------------------------------------'
+    Rails.logger.info params[:text]
+    Rails.logger.info '---------------------------------------------------------------------------'
     # the hook that is triggered when receiving an email.
     if params[:format] == 'json'
       using_hook = true # we assume different policies to create a ticket when we receive an email
       base64_message = ((params[:base64] == true) || !(params[:text][0,64] =~ /^([A-Za-z0-9+\/]{4})*([A-Za-z0-9+\/]{4}|[A-Za-z0-9+\/]{3}=|[A-Za-z0-9+\/]{2}==)$/).nil?)
       message = base64_message ? Base64.decode64(params[:text].strip) : params[:text]
+      Rails.logger.info '---------------------------------------------------------------------------'
+      Rails.logger.info message
+      Rails.logger.info '---------------------------------------------------------------------------'
       @ticket = TicketMailer.receive(message)
     else
       using_hook = false
