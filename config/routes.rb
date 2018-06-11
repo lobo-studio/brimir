@@ -60,6 +60,6 @@ Brimir::Application.routes.draw do
   # Custom
 
   #root 'payment_requests#new'
-
+  post '/email_processor' => 'tickets#create'
   #mount_griddler
 end
