@@ -1,5 +1,9 @@
 class EmailProcessor
-  def self.process(email)
+  def initialize(email)
+    @email = email
+  end
+
+  def process
     begin
       Rails.logger.info '---------------------------------------------------------------------------'
       Rails.logger.info email
@@ -7,6 +11,5 @@ class EmailProcessor
     rescue Exception => e
       puts email
     end
-
   end
 end
