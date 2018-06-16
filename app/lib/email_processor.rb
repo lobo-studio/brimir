@@ -18,7 +18,7 @@ class EmailProcessor
 
   def process
     puts @email.inspect
-    email = @email
+    email = Mail.new(@email.raw_headers)
     # is this an address verification mail?
     if VerificationMailer.receive(email)
       return
