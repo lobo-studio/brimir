@@ -17,6 +17,7 @@ class EmailProcessor
   end
 
   def process
+    puts email.inspect
     email = @email
     # is this an address verification mail?
     if VerificationMailer.receive(email)
