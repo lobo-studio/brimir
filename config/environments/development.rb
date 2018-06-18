@@ -36,14 +36,14 @@ Rails.application.configure do
   config.action_mailer.default_options = { from: 'brimir@mesbesoinsmoto.com' }
   config.action_mailer.default_url_options = { host: 'tickets.mesbesoinsmoto.com' }
   config.action_mailer.smtp_settings = {
-     address: 'mail.gandi.net',
-     port: 587,
-     from: 'brimir@mesbesoinsmoto.com',
-     #domain: 'mesbesoinsmoto.com',
-     user_name: 'brimir@mesbesoinsmoto.com',
-     password: 'bQG-c5y-3Vs-U7J',
-     authentication: 'plain',
-     enable_starttls_auto: true
+    address: 'smtp.sendgrid.net',
+    port: 587,
+    from: 'brimir@mesbesoinsmoto.com',
+    domain: 'mesbesoinsmoto.com',
+    user_name: 'brimir@mesbesoinsmoto.com',
+    password: 'bQG-c5y-3Vs-U7J',
+    authentication: :plain,
+    enable_starttls_auto: true
   }
   config.action_mailer.perform_caching = false
 
