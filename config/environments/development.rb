@@ -42,7 +42,7 @@ Rails.application.configure do
     domain: 'mesbesoinsmoto.com',
     user_name: 'brimir@mesbesoinsmoto.com',
     password: 'bQG-c5y-3Vs-U7J',
-    authentication: :plain,
+    authentication: :login,
     enable_starttls_auto: true
   }
   config.action_mailer.perform_caching = false
