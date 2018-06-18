@@ -82,13 +82,13 @@ Rails.application.configure do
   end
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_options = { from: 'contact@parse.mesbesoinsmoto.com' }
+  config.action_mailer.default_options = { from: 'brimir@mesbesoinsmoto.com' }
   config.action_mailer.default_url_options = { host: 'tickets.mesbesoinsmoto.com' }
 
   config.action_mailer.smtp_settings = {
     address: 'smtp.sendgrid.net',
     port: 587,
-    from: 'contact@parse.mesbesoinsmoto.com',
+    from: 'brimir@mesbesoinsmoto.com',
     domain: 'mesbesoinsmoto.com',
     user_name: ENV["SENDGRID_USERNAME"],
     password: ENV["SENDGRID_PASSWORD"],
