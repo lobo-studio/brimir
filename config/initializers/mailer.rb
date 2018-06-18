@@ -5,11 +5,13 @@ if Rails.env.production?
   end
 
   ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.sendgrid.net',
-    :port           => '587',
-    :authentication => :plain,
-    :user_name      => 'brimir@mesbesoinsmoto.com',
-    :password       => 'bQG-c5y-3Vs-U7J',
-    :domain         => "mesbesoinsmoto.com",
+    address: 'smtp.sendgrid.net',
+    port: 587,
+    from: 'brimir@mesbesoinsmoto.com',
+    domain: 'mesbesoinsmoto.com',
+    user_name: 'brimir@mesbesoinsmoto.com',
+    password: 'bQG-c5y-3Vs-U7J',
+    authentication: :plain,
+    enable_starttls_auto: true
   }
 end
