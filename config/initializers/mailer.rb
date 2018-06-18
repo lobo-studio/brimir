@@ -11,7 +11,7 @@ if Rails.env.production?
     domain: 'mesbesoinsmoto.com',
     user_name: 'brimir@mesbesoinsmoto.com',
     password: 'bQG-c5y-3Vs-U7J',
-    authentication: :plain,
+    authentication: :login,
     enable_starttls_auto: true
   }
 end
