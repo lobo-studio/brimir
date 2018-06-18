@@ -90,8 +90,8 @@ Rails.application.configure do
     port: 587,
     from: 'brimir@mesbesoinsmoto.com',
     domain: 'mesbesoinsmoto.com',
-    user_name: 'brimir@mesbesoinsmoto.com',
-    password: 'bQG-c5y-3Vs-U7J',
+    user_name: ENV["SENDGRID_USERNAME"],
+    password: ENV["SENDGRID_PASSWORD"],
     authentication: :login,
     enable_starttls_auto: true
   }
