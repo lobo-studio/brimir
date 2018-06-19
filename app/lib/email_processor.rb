@@ -17,7 +17,7 @@ class EmailProcessor
   end
 
   def process
-    puts @email.inspect
+
     email = Mail.new(@email.raw_headers)
     # is this an address verification mail?
     if VerificationMailer.receive(email)
@@ -25,8 +25,9 @@ class EmailProcessor
     end
 
     content = ''
+    content = @email.raw_body if @email.raw_body.present?
 
-    if email.multipart?
+    if email.multipart? && email.parts.size > 0
       if email.html_part
         content = normalize_body(email.html_part, email.html_part.charset)
         content_type = 'html'
@@ -85,10 +86,10 @@ class EmailProcessor
     if response_to
       # reopen ticket
       ticket.status = :open
-      ticket.save
-
+      ticket.save!
+      content = @email.raw_body if @email.raw_body.present?	
       # add reply
-      incoming = Reply.create({
+      incoming = Reply.create!({
         content: content,
         ticket_id: ticket.id,
         from: from_address,
@@ -105,7 +106,7 @@ class EmailProcessor
           email.to.to_a + email.cc.to_a + email.bcc.to_a)
 
       # add new ticket
-      ticket = Ticket.create({
+      ticket = Ticket.create!({
         from: from_address,
         orig_to: to_addresses,
         orig_cc: cc_addresses,
@@ -143,7 +144,7 @@ class EmailProcessor
           content_id = attachment.content_id[1..-2]
           content_id = nil unless incoming.content.include?(content_id)
         end
-        incoming.attachments.create(file: file,
+        incoming.attachments.create!(file: file,
             content_id: content_id)
       end
 
